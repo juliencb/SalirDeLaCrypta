@@ -16,6 +16,7 @@ public class explosion : MonoBehaviour {
 
 	void finAnimation(){
 		GameObject.Destroy (this.gameObject);
+
 	}
 
 	void OnTriggerEnter2D (Collider2D coll){
@@ -26,5 +27,4 @@ public class explosion : MonoBehaviour {
 			rbTouche.SendMessageUpwards ("Toucher", 1, SendMessageOptions.RequireReceiver);
 		}
 	}
-
 }

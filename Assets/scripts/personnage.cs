@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class personnage : MonoBehaviour
 {
-
 	private Rigidbody2D rb;
 	public float vitesse = 1f;
 	private float hori = 0f;
@@ -60,8 +59,7 @@ public class personnage : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D coll)
 	{
-
-		if(coll.gameObject.name == "bombe(Clone)" ){
+		if (coll.gameObject.name == "bombe(Clone)") {
 			nbBombe++;
 			txtnbBombe.text = nbBombe.ToString ();
 		}
@@ -80,7 +78,7 @@ public class personnage : MonoBehaviour
 			}
 		}
 	}
-		
+
 	void Toucher (float dmg)
 	{
 		if (!ouch) {

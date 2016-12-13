@@ -22,7 +22,7 @@ public class Canvas : MonoBehaviour
 	public void JouerJeu (string maScene)
 	{
 		Debug.Log ("Commencer le jeu");
-		SceneManager.LoadScene ("scene_Test_Julien");
+		SceneManager.LoadScene ("Niveau1");
 		ecranDemarrage.gameObject.SetActive (false);
 		Time.timeScale = 1;
 	}

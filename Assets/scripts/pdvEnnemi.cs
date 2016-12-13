@@ -3,9 +3,7 @@ using System.Collections;
 
 public class pdvEnnemi : MonoBehaviour
 {
-
 	public float vieRestante;
-
 
 	void Toucher (float dmg)
 	{
@@ -14,6 +12,4 @@ public class pdvEnnemi : MonoBehaviour
 			GameObject.Destroy (this.gameObject);
 		}
 	}
-
-
 }
