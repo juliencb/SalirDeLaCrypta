@@ -9,7 +9,6 @@ public class personnage : MonoBehaviour
 {
 
 	private Rigidbody2D rb;
-	private Collider2D colli;
 	public float vitesse = 1f;
 	private float hori = 0f;
 	private  float verti = 0f;
@@ -20,24 +19,34 @@ public class personnage : MonoBehaviour
 	public float nbVie = 3;
 	public GameObject bombe;
 	public Transform pointDepotBombe;
+	private bool ouch = false;
+	private float tempsInvincible = 0f;
 
 	// Use this for initialization
 	void Start ()
 	{
 		this.rb = GetComponent<Rigidbody2D> ();
-		this.colli = GetComponent<Collider2D> ();
 		txtnbBombe.text = "0";
+		txtnbVies.text = nbVieMax.ToString();
 
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+
+		if (ouch) {
+			tempsInvincible += Time.deltaTime;
+			if(tempsInvincible >1){
+				ouch = false;
+				tempsInvincible = 0;
+			}
+		}
+
 		if (Input.GetKeyDown (KeyCode.E) && nbBombe > 0) {
 			GameObject bombeExplose = Instantiate (bombe, pointDepotBombe.position, transform.localRotation) as GameObject;
 			nbBombe--;
 			txtnbBombe.text = nbBombe.ToString ();
-
 		}
 	}
 
@@ -57,14 +66,10 @@ public class personnage : MonoBehaviour
 			txtnbBombe.text = nbBombe.ToString ();
 		}
 
-		if (coll.gameObject.name == "coeur(Clone)" && nbVie < nbVieMax) {
-			nbVie++;
-			txtnbVies.text = nbVie.ToString ();
-		}
-
 		if (coll.gameObject.transform.parent) {
 
-			if (coll.gameObject.transform.parent.name == "mesEnnemis") {
+			if (coll.gameObject.transform.parent.name == "mesEnnemis" && !ouch) {
+				ouch = true;
 				nbVie--;
 				if (nbVie <= 0) {
 					//Debug.Log ("mort");
@@ -74,21 +79,16 @@ public class personnage : MonoBehaviour
 				}
 			}
 		}
-
 	}
-
-	/*void OnTriggerExit2D (Collider2D coll)
-	{
-		//Debug.Log("out");
-		this.colli.enabled = true;
-	}*/
-
+		
 	void Toucher (float dmg)
 	{
-		nbVie -= dmg;
-		if (nbVie <= 0) {
-			Debug.Log ("JE SUIS MORT");
-			txtnbVies.text = nbVie.ToString ();
+		if (!ouch) {
+			nbVie -= dmg;
+			if (nbVie <= 0) {
+				Debug.Log ("JE SUIS MORT");
+				txtnbVies.text = nbVie.ToString ();
+			}
 		}
 	}
 }

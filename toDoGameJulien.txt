@@ -1,0 +1,26 @@
+BOMBE
+
+
+
+COEUR
+
+
+
+
+VIE
+
+
+
+
+PROJECTILE
+
+
+
+ENNEMIS
+touche, perd pdv
+
+
+
+
+
+BONUS MINIBOSS
